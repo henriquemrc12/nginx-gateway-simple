@@ -1,0 +1,31 @@
+
+upstream ms-example-default {
+        server 172.0.0.1:7080;
+}
+
+upstream ms-example-1 {
+        server 172.0.0.1:7081;
+}
+
+upstream ms-example-2 {
+        server 172.0.0.1:7082;
+}
+
+server {
+    listen       80;
+    listen  [::]:80;
+    server_name  nginx;
+
+    location / {
+        proxy_pass http://ms-example-default;
+    }
+
+    location /ms-example-1/  {
+        proxy_pass http://ms-example-1/;
+    }
+
+    location /ms-example-2/  {
+        proxy_pass http://ms-example-2/;
+    }
+}
+
